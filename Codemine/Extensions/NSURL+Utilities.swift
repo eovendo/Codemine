@@ -23,7 +23,7 @@ public extension URL {
      while the other dimension is altered to maintain the same aspect ratio of the input image.
      - Standard: Default/normal image mode. No changes to the ratio.
      */
-    public enum ImageUrlMode : String {
+    enum ImageUrlMode : String {
 		case resize		= "resize"
 		case crop		= "crop"
 		case fit		= "fit"
@@ -41,7 +41,7 @@ public extension URL {
         - widthParameterName: the name of the width paramter. Default is 'h'
      - returns: `URL` as a `NSURL`.
      */
-    public func appendingAssetSize(_ size: CGSize, mode: ImageUrlMode = .default, heightParameterName : String = "h", widthParameterName : String = "w") -> URL? {
+    func appendingAssetSize(_ size: CGSize, mode: ImageUrlMode = .default, heightParameterName : String = "h", widthParameterName : String = "w") -> URL? {
         guard var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: false) else { return nil }
         
         var queryItems:[URLQueryItem] = urlComponents.queryItems ?? []
@@ -60,7 +60,7 @@ public extension URL {
         - name: the URL parameter to look for
      - returns: the first value found for `name` or nil if no value was found
      */
-    public func value(forParameter name: String) -> String? {
+    func value(forParameter name: String) -> String? {
         guard let urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true),
             let queryItems = urlComponents.queryItems else {
                 return nil
@@ -75,7 +75,7 @@ public extension URL {
         - queryParameters: a `String` : `String` dictionary containing the queryParameters to append
      - returns: a new `URL` instance with the appended queryParameters or nil if the appending failed
      */
-    public func append(queryParameters: [String: String]) -> URL? {
+    func append(queryParameters: [String: String]) -> URL? {
         guard var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true) else {
             return nil
         }
